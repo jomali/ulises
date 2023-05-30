@@ -1,21 +1,45 @@
 import React from "react";
 import { NewLine, Option, Storylet } from "components/engine";
 import Itaca2 from "./Itaca2";
+import Itaca3 from "./Itaca3";
 
 const Itaca1 = () => {
   const options = (story) => [
-    <Option storylet={Itaca2}>Atravesar control fronterizo</Option>,
+    <Option
+      difficulty={200}
+      disabled
+      onClick={(value) =>
+        story.update({ id: "money", value: story.data.money - value })
+      }
+      storylet={Itaca1}
+      variant="money"
+    >
+      Comprar el pase al otro lado
+    </Option>,
+    <Option storylet={Itaca2}>Observar control fronterizo</Option>,
+    <Option storylet={Itaca3}>Buscar un lugar en el campamento</Option>,
   ];
 
   return (
     <Storylet options={options}>
-      Desde lo alto de un pequeño promontorio lo vemos por fin. El puesto
-      fronterizo. ¡Hemos llegado!
+      La travesía por el desierto se interrumpe abruptamente al alcanzar la
+      frontera. Pero nadie lo celebra. No todavía. Y es que cada vez que se
+      traza una frontera alguien se queda fuera.
       <NewLine />
-      Hay una extensa fila de vehículos aguardando pacientemente su turno para
-      pasar el control fronterizo y cruzar al otro lado. En el control, guardias
-      armados con rifles automáticos montando guardia y revisando documentos.
-      Varios furgones blindados. Una gruesa barrera cortando el paso.
+      Tres vallas dan forma física a la línea imaginaria que separa los dos
+      países. Tres vallas que no dejan indiferente a nadie. Tres vallas que
+      imponen y encogen el estómago hasta hacerle a uno vomitar y uno vomita
+      aunque no sea más que bilis porque ya no queda otra cosa que expulsar. Uno
+      vomita porque sabe que en esas tres vallas se han perdido innumerables
+      vidas.
+      <NewLine />
+      Sólo hay dos formas de cruzar al otro lado. Sobornando a los guardias del
+      control fronterizo, si tienes dinero. O arriesgándote e intentar el salto.
+      <NewLine />
+      Una suerte de asentamiento improvisado y caótico, con varios cientos de
+      tiendas, se ha levantado de vuestro lado de las vallas para todos aquellos
+      que no pueden pagar el soborno y están tratando de decidirse entre
+      arriesgarlo todo; o rendirse y emprender el camino de vuelta.
     </Storylet>
   );
 };

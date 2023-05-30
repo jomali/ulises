@@ -11,10 +11,10 @@ const MendigandoEntrePretendientes1 = () => {
 
   return (
     <Storylet options={options}>
-      Caminamos lentamente pero a ritmo constante sobre el terreno irregular,
-      siguiendo dirección norte. Ignoramos dónde nos encontramos, pero sabemos
-      que la frontera queda en algún lugar hacia el norte. Así que esa es la
-      dirección que decidimos seguir. Al norte.
+      Camináis lentamente pero a ritmo constante sobre el terreno irregular,
+      siguiendo dirección norte. Ignoráis dónde os encontráis exactamente, pero
+      confiáis en la promesa de que la frontera queda en algún lugar, no muy
+      lejos, hacia el norte. Así que esa es la dirección que seguís. Al norte.
       <NewLine />
       Piedras y polvo hasta donde alcanza la vista.
       <NewLine />

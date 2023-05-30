@@ -1,5 +1,5 @@
 import React from "react";
-import CurrencyPoundIcon from "@mui/icons-material/CurrencyPound";
+import CurrencyLiraIcon from "@mui/icons-material/CurrencyLira";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ButtonBase from "@mui/material/ButtonBase";
 import Stack from "@mui/material/Stack";
@@ -56,7 +56,7 @@ const Option = (props) => {
         return (
           <Stack direction="row" spacing={0.4}>
             <Typography>{difficulty}</Typography>
-            <CurrencyPoundIcon />
+            <CurrencyLiraIcon />
           </Stack>
         );
       case "stamina":

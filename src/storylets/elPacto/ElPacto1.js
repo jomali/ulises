@@ -27,10 +27,10 @@ const ElPacto1 = () => {
       levanta como un bloque de ladrillos cascarillados y ventanas rotas. Pasan
       varios minutos de las dos de la madrugada. La noche no tiene luna y la
       oscuridad es espesa. Viscosa. No se oye nada más que los susurros
-      intranquilos de mis compañeros y las instrucciones cortantes pero en voz
-      queda de nuestros guías.
+      intranquilos de tus compañeros y las instrucciones cortantes pero en voz
+      queda de vuestros guías.
       <NewLine />
-      Cincuenta duros, repite, tendiéndome una mano.
+      Cincuenta duros, repite, tendiéndote una mano.
     </Storylet>
   );
 };

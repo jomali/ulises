@@ -1,28 +1,28 @@
 import React from "react";
 import { NewLine, Option, Storylet } from "components/engine";
-import MendigandoEntrePretendientes1 from "storylets/mendigandoEntrePretendientes/MendigandoEntrePretendientes1";
+import ElPacto3a from "./ElPacto3a";
+import ElPacto3b from "./ElPacto3b";
+import ElPacto3c from "./ElPacto3c";
 
 const ElPacto3 = () => {
   const options = (story) => [
-    <Option storylet={MendigandoEntrePretendientes1}>
-      —Te di todo lo que tenía
-    </Option>,
+    <Option storylet={ElPacto3a}>—Ya te di todo lo que tenía</Option>,
     <Option
       difficulty={10}
       onClick={(value) =>
         story.update({ id: "money", value: story.data.money - value })
       }
-      storylet={MendigandoEntrePretendientes1}
+      storylet={ElPacto3b}
       variant="money"
     >
-      —Esto es todo cuanto me queda
+      —Sólo me queda esto
     </Option>,
     <Option
       difficulty={50}
       onClick={(value) =>
         story.update({ id: "money", value: story.data.money - value })
       }
-      storylet={MendigandoEntrePretendientes1}
+      storylet={ElPacto3c}
       variant="money"
     >
       Dar el dinero
@@ -33,18 +33,18 @@ const ElPacto3 = () => {
     <Storylet options={options}>
       ¿Por qué hemos parado? ¿Dónde estamos?
       <NewLine />
-      Uno de vuestros guías se os acerca y os indica que se ha acabado la
-      gasolina. Si queréis continuar tenemos que ir a comprar más, dice.
+      Uno de vuestros guías se os acerca y os dice que se está acabando la
+      gasolina. Si queréis continuar tenéis que pagar para que vayamos a por
+      más, asegura.
       <NewLine />
-      Y con ese pretexto os demanda más dinero a todos. Posiblemente se trate de
-      una farsa. Pero estáis en medio de ninguna parte.
+      Posiblemente se trate de una farsa. Pero estáis en medio de ninguna parte.
       <NewLine />
       El sol abrasador sobre vuestras cabezas.
       <NewLine />
-      Tus compañeros ceden a la extorsión y pagan.
+      Asustados, tus compañeros ceden a la extorsión y pagan.
       <NewLine />
-      Tú, te señala. Es el mismo que os recibió en el pueblo. Los cincuenta
-      talentos.
+      Tú, te señala. Y te das cuenta de que se trata del mismo tipo con el que
+      hablaste en el pueblo. Cincuenta duros.
     </Storylet>
   );
 };

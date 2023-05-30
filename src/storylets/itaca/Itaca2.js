@@ -1,5 +1,6 @@
 import React from "react";
 import { NewLine, Option, Storylet } from "components/engine";
+import Itaca3 from "./Itaca3";
 
 const Itaca2 = () => {
   const options = (story) => [
@@ -9,20 +10,26 @@ const Itaca2 = () => {
       onClick={(value) =>
         story.update({ id: "money", value: story.data.money - value })
       }
-      storylet={Itaca2}
+      storylet={Itaca3}
       variant="money"
     >
-      Comprar documentación
+      Comprar el pase al otro lado
     </Option>,
-    <Option storylet={Itaca2}>Cruzar a la fuerza</Option>,
+    <Option storylet={Itaca3}>Buscar un lugar en el campamento</Option>,
   ];
 
   return (
     <Storylet options={options}>
-      No podéis pasar sin la documentación en regla.
+      Tres aberturas atraviesan las tres vallas. Y entre ellas se levanta el
+      control fronterizo.
       <NewLine />
-      Una pequeña muchedumbre se ha formado. Nadie tiene dinero para comprar los
-      papeles. Piensan asaltar las vallas y cruzar por la fuerza.
+      Guardias con uniforme militar y armados con rifles automáticos.
+      <NewLine />
+      Furgones blindados.
+      <NewLine />
+      Torres de observación.
+      <NewLine />
+      Alambrada de espino y barreras cortando el paso al tráfico.
     </Storylet>
   );
 };

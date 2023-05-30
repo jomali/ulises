@@ -1,18 +1,19 @@
 import React from "react";
 import { NewLine, Option, Storylet } from "components/engine";
-import LaUltimaCena1 from "storylets/laUltimaCena/LaUltimaCena1";
+import Itaca1 from "storylets/itaca/Itaca1";
 
 const DescensoAlHades1 = () => {
-  const options = () => [<Option storylet={LaUltimaCena1}>Continuar</Option>];
+  const options = () => [<Option storylet={Itaca1}>Al norte</Option>];
 
   return (
     <Storylet options={options}>
-      Apenas nos dirigimos las miradas durante el resto del día. El calor es
-      insoportable. La sed y el hambre mucho peor. No teníamos agua. Tampoco
-      comida. No todo el mundo era capaz de resistirlo. Tres cuerpos se
-      desploman inconscientes en la arena.
+      Camináis en fila india bajo el sol inclemente. Semidesnudos. Hostigados a
+      cada paso por la sed y el hambre.
       <NewLine />
-      Los demás seguimos caminando.
+      No todo el mundo es capaz de resistirlo. Tres cuerpos se desploman
+      inconscientes en la arena.
+      <NewLine />
+      Los demás seguís caminando.
     </Storylet>
   );
 };

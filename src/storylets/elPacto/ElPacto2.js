@@ -13,11 +13,11 @@ const ElPacto2 = () => {
       en un segundo vehículo. Hombres y mujeres de mirada recelosa y silencios
       prolongados.
       <NewLine />
-      Finalmente las furgonetas se detienen y tenéis ocasión de bajaros y
-      estirar las piernas.
+      Finalmente las furgonetas se detienen y tenéis ocasión de bajar y estirar
+      las piernas.
       <NewLine />
-      El paisaje que os rodea es una desolación de piedra, arena y polvo. El
-      único accidente que llama la atención es un árbol raquítico, a lo lejos.
+      El paisaje que os rodea es una desolación de piedra y de arena y de polvo.
+      Un árbol raquítico, a lo lejos, como único accidente.
     </Storylet>
   );
 };
