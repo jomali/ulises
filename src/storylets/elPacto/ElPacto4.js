@@ -13,7 +13,7 @@ const ElPacto4 = () => {
     <Storylet options={options}>
       Y, sin más, se suben a los dos vehículos y parten, abandonándoos allí.
       <NewLine />
-      Sabéis muy bien que no piensan a regresar.
+      No piensan a regresar.
       <NewLine />
       Alguien asegura que conoce el camino, que estáis a apenas unos días de la
       frontera. Que podéis llegar andando.
