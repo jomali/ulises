@@ -17,24 +17,24 @@ const Main = styled("main", {
 })(({ theme, openMenu }) => ({
   display: "flex",
   height: "100%",
-  marginRight: 0,
-  transition: theme.transitions.create("margin", {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
-  ...(openMenu && {
-    transition: theme.transitions.create("margin", {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-    marginRight: DRAWER_WIDTH,
-  }),
+  // marginRight: 0,
+  // transition: theme.transitions.create("margin", {
+  //   easing: theme.transitions.easing.sharp,
+  //   duration: theme.transitions.duration.leavingScreen,
+  // }),
+  // ...(openMenu && {
+  //   transition: theme.transitions.create("margin", {
+  //     easing: theme.transitions.easing.easeOut,
+  //     duration: theme.transitions.duration.enteringScreen,
+  //   }),
+  //   marginRight: DRAWER_WIDTH,
+  // }),
 }));
 
 export const StoryContext = React.createContext();
 
 export const StoryProvider = (props) => {
-  const { children, initialState, menu, renderTitle } = props;
+  const { children, initialState, menu, onRestart, renderTitle } = props;
 
   const theme = useTheme();
   const storyState = useStoryState(storylets.initial, initialState);
@@ -58,6 +58,7 @@ export const StoryProvider = (props) => {
       setOpenMenu(false);
       if (force) {
         storyState.onRestart();
+        onRestart();
       } else {
         setOpenRestartConfirmation(true);
       }
@@ -73,9 +74,9 @@ export const StoryProvider = (props) => {
     <StoryContext.Provider value={story}>
       <ThemeProvider theme={storyState.theme || theme}>
         <NotificationProvider autoHideDuration={2000}>
-          <Main openMenu={permanentMenu}>
+          <Main openMenu={permanentMenu && false}>
             <StatusBar
-              onMenuClick={() => setOpenMenu(true)}
+              onMenuClick={() => story.restart()}
               title={
                 renderTitle(storyState.data) || storyState.currentStorylet.title
               }
@@ -101,17 +102,18 @@ export const StoryProvider = (props) => {
 
             {typeof children === "function" ? children(story) : children}
 
-            <Menu
+            {/* <Menu
               onClose={() => setOpenMenu(false)}
               open={openMenu}
               permanentMenu={permanentMenu}
               values={menu(storyState)}
-            />
+            /> */}
 
             <RestartConfirmationDialog
               onAccept={() => {
                 setOpenRestartConfirmation(false);
                 storyState.onRestart();
+                onRestart();
               }}
               onClose={() => setOpenRestartConfirmation(false)}
               open={openRestartConfirmation}

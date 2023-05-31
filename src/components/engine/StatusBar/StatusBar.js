@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "@emotion/styled";
-import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
+import ReplayRoundedIcon from "@mui/icons-material/ReplayRounded";
 import AppBar from "@mui/material/AppBar";
 import Fade from "@mui/material/Fade";
 import IconButton from "@mui/material/IconButton";
@@ -46,7 +46,12 @@ const StatusBar = (props) => {
       >
         <Toolbar>
           <Fade in={title === debouncedTitle}>
-            <Typography sx={{ fontWeight: theme.typography.fontWeightBold }}>
+            <Typography
+              sx={{
+                color: theme.palette.text.primary,
+                fontWeight: theme.typography.fontWeightBold,
+              }}
+            >
               {debouncedTitle}
             </Typography>
           </Fade>
@@ -57,7 +62,7 @@ const StatusBar = (props) => {
             onClick={onMenuClick}
             size="medium"
           >
-            <MenuRoundedIcon fontSize="inherit" />
+            <ReplayRoundedIcon fontSize="inherit" />
           </IconButton>
         </Toolbar>
       </AppBar>

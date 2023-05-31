@@ -1,5 +1,4 @@
 import React from "react";
-
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -11,7 +10,7 @@ const RestartConfirmationDialog = (props) => {
 
   return (
     <Dialog maxWidth="xs" open={open} {...otherProps}>
-      <DialogTitle>Confirmación</DialogTitle>
+      <DialogTitle>Advertencia</DialogTitle>
       <DialogContent>
         Al reiniciar la historia, cualquier avance hecho hasta el momento se
         perderá. ¿Quieres continuar?
@@ -20,7 +19,7 @@ const RestartConfirmationDialog = (props) => {
         <Button autoFocus onClick={onClose}>
           Cancelar
         </Button>
-        <Button onClick={onAccept}>Aceptar</Button>
+        <Button onClick={onAccept}>Reiniciar</Button>
       </DialogActions>
     </Dialog>
   );
