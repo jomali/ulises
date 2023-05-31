@@ -33,11 +33,11 @@ const Itaca1 = () => {
       vomita porque sabe que en esas tres vallas se han perdido innumerables
       vidas.
       <NewLine />
-      Sólo hay dos formas de cruzar al otro lado. Sobornando a los guardias del
+      Sólo hay dos formas de cruzar al otro lado. Pagando un salvoconducto en el
       control fronterizo, si tienes dinero. O arriesgándote e intentar el salto.
       <NewLine />
       Una suerte de asentamiento improvisado y caótico, con varios cientos de
-      tiendas, se ha levantado de vuestro lado de las vallas para todos aquellos
+      tiendas, se ha levantado de vuestro lado de la frontera para todos aquellos
       que no pueden pagar el soborno y están tratando de decidirse entre
       arriesgarlo todo; o rendirse y emprender el camino de vuelta.
     </Storylet>
