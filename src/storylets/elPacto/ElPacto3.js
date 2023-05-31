@@ -1,5 +1,5 @@
 import React from "react";
-import { NewLine, Option, Storylet } from "components/engine";
+import { Emphasis, NewLine, Option, Storylet } from "components/engine";
 import ElPacto3a from "./ElPacto3a";
 import ElPacto3b from "./ElPacto3b";
 import ElPacto3c from "./ElPacto3c";
@@ -35,7 +35,7 @@ const ElPacto3 = () => {
       <NewLine />
       Uno de vuestros guías se os acerca y os dice que se está acabando la
       gasolina. Si queréis continuar tenéis que pagar para que vayamos a por
-      más, asegura.
+      más.
       <NewLine />
       Posiblemente se trate de una farsa. Pero estáis en medio de ninguna parte.
       <NewLine />
@@ -44,7 +44,7 @@ const ElPacto3 = () => {
       Asustados, tus compañeros ceden a la extorsión y pagan.
       <NewLine />
       Tú, te señala. Y te das cuenta de que se trata del mismo tipo con el que
-      hablaste en el pueblo. Cincuenta duros.
+      hablaste en el pueblo. <Emphasis>Cincuenta</Emphasis> duros.
     </Storylet>
   );
 };
