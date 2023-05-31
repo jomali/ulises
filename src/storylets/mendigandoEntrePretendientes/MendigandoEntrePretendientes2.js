@@ -15,7 +15,7 @@ const MendigandoEntrePretendientes2 = () => {
       Una de las personas que encabezan la marcha da la voz. Han visto algo.
       <NewLine />
       Al ir acercándoos al lugar, el silencio que os lleva acompañando durante
-      el todo el viaje va cobrando mayor peso si cabe. Hasta hacerse atronador.
+      el todo el viaje va ganando peso. Hasta hacerse atronador.
       <NewLine />
       Semienterrados en la arena descubrís los cadáveres de dos personas.
       <NewLine />
