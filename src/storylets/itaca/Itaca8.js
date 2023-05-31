@@ -22,8 +22,8 @@ const Itaca8 = () => {
     <Storylet options={options}>
       Quítate la ropa.
       <NewLine />
-      Te ha conducido hasta una habitación en la que te esperaban otros cuatro
-      guardias distintos. El que da la orden se arremanga la camisa del uniforme
+      Te encuentras en una habitación con cuatro hombres vestidos con uniforme
+      de soldado. El que da la orden se arremanga la camisa
       y se coloca un guante negro de látex. Lloras de miedo y de rabia y de
       impotencia. Y obedeces.
     </Storylet>
