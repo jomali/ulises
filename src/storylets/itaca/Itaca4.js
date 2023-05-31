@@ -14,7 +14,7 @@ const Itaca4 = () => {
       Hay hombres y mujeres corriendo a tu alrededor. Intentas incorporarte y
       sacudirte el sueño de los ojos mientras observas a una muchedumbre que se
       ha arremolinado a los pies de la primera de las vallas. Y aunque los estás
-      viendo con tus propios ojos, aún tardas unos minutos en comprender lo que
+      viendo con tus propios ojos, aún tardas un instante en comprender lo que
       ocurre.
       <NewLine />
       Están saltando. Decenas de ellos. Están saltando.
