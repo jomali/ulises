@@ -18,7 +18,7 @@ const Itaca9 = () => {
 
   return (
     <Storylet options={options}>
-      De nuevo en la celda. Lloras.
+      De nuevo en la celda.
       <NewLine />
       Uno de tus compañeros te abraza y llora contigo en silencio.
       {lostMoney > 0 && (
