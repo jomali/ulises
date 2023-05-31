@@ -29,8 +29,8 @@ const ElPacto3a = () => {
 
   return (
     <Storylet options={options}>
-      Ya te di antes todo lo q- un puñetazo salvaje corta tu mentira y te tumba
-      en el suelo.
+      Ya te di antes todo lo q− un puñetazo salvaje interrumpe tu mentira y te hace caer
+      al suelo.
       <NewLine />
       No tenemos todo el día. El dinero.
     </Storylet>
