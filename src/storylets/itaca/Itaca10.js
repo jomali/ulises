@@ -17,8 +17,8 @@ const Itaca10 = () => {
       destruido y abandonado.
       <NewLine />
       Conducen sólo unos pocos kilómetros más antes de detener el vehículo. Os
-      sacan del furgón sin siquiera dirigiros la palabra. Arrancan y se marchan,
-      dejándoos allí, en el desierto.
+      sacan del furgón sin siquiera dirigiros la palabra. Arrancan y se marchan y
+      vosotros os quedáis aquí, solos, en el desierto.
     </Storylet>
   );
 };
