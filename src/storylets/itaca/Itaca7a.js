@@ -21,14 +21,15 @@ const Itaca7a = () => {
       Tengo dinero. Puedo pagar.
       <NewLine />
       Apenas eres capaz de articular la frase, pero el guardia cambia el paso y
-      os hace apartaros a un lado. Te asegura de que puede ayudarte a salir del lío en el
-      que te has metido.
+      os hace apartaros a un lado. Te asegura de que puede ayudarte a salir del
+      lío en el que te has metido.
       <NewLine />
       Le das todo el dinero que te queda.
       <NewLine />
       Él asiente con la cabeza. Muy bien.
       <NewLine />
-      Con un gesto, señala hacia el final del pasillo. La última puerta, a la derecha.
+      Con un gesto, señala hacia el final del pasillo. La última puerta, a la
+      derecha.
       <NewLine />
       <Strong>Has perdido {lostMoney} talentos.</Strong>
     </Storylet>

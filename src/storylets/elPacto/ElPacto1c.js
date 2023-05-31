@@ -3,7 +3,9 @@ import { NewLine, Option, Storylet, Strong } from "components/engine";
 import ElPacto2 from "./ElPacto2";
 
 const ElPacto1c = () => {
-  const options = () => [<Option storylet={ElPacto2}>Os ponéis en marcha</Option>];
+  const options = () => [
+    <Option storylet={ElPacto2}>Os ponéis en marcha</Option>,
+  ];
 
   return (
     <Storylet options={options}>

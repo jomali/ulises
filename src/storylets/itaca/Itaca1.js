@@ -37,9 +37,9 @@ const Itaca1 = () => {
       control fronterizo, si tienes dinero. O arriesgándote e intentar el salto.
       <NewLine />
       Una suerte de asentamiento improvisado y caótico, con varios cientos de
-      tiendas, se ha levantado de vuestro lado de la frontera para todos aquellos
-      que no pueden pagar el soborno y están tratando de decidirse entre
-      arriesgarlo todo; o rendirse y emprender el camino de vuelta.
+      tiendas, se ha levantado de vuestro lado de la frontera para todos
+      aquellos que no pueden pagar el soborno y están tratando de decidirse
+      entre arriesgarlo todo; o rendirse y emprender el camino de vuelta.
     </Storylet>
   );
 };
