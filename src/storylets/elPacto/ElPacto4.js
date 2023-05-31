@@ -18,7 +18,7 @@ const ElPacto4 = () => {
       Alguien asegura que conoce el camino, que estáis a apenas unos días de la
       frontera. Que podéis llegar andando.
       <NewLine />
-      Todavía dudáis durante unos instantes, pero nadie es capaz de proponer una
+      Todavía dudáis durante algunos minutos, indecisos, pero nadie es capaz de proponer una
       idea mejor.
     </Storylet>
   );
