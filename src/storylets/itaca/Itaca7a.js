@@ -4,7 +4,7 @@ import Itaca8 from "./Itaca8";
 
 const Itaca7a = () => {
   const options = (story) => [
-    <Option storylet={Itaca8}>Seguirlo en silencio</Option>,
+    <Option storylet={Itaca8}>Seguir sus indicaciones</Option>,
   ];
 
   const story = useStory();
@@ -20,15 +20,15 @@ const Itaca7a = () => {
     <Storylet options={options}>
       Tengo dinero. Puedo pagar.
       <NewLine />
-      Apenas eres capaz de articular la frase, pero el guardia detiene el paso y
-      te mira a los ojos. Te asegura de que puede ayudarte a salir del lío en el
+      Apenas eres capaz de articular la frase, pero el guardia cambia el paso y
+      os hace apartaros a un lado. Te asegura de que puede ayudarte a salir del lío en el
       que te has metido.
       <NewLine />
       Le das todo el dinero que te queda.
       <NewLine />
-      Él asiente con la cabeza.
+      Él asiente con la cabeza. Muy bien.
       <NewLine />
-      Muy bien. Por aquí.
+      Con un gesto, señala hacia el final del pasillo. La última puerta, a la derecha.
       <NewLine />
       <Strong>Has perdido {lostMoney} talentos.</Strong>
     </Storylet>
