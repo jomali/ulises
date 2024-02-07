@@ -1,5 +1,5 @@
 import React from "react";
-import { Emphasis, NewLine, Option, Storylet } from "components/engine";
+import { NewLine, Option, Storylet } from "components/engine";
 import ElPalacioDeAlcinoo1 from "storylets/elPalacioDeAlcinoo/ElPalacioDeAlcinoo1";
 
 const MendigandoEntrePretendientes2 = () => {
@@ -22,9 +22,7 @@ const MendigandoEntrePretendientes2 = () => {
       Una misma sombra cruza vuestras caras. Un mismo pensamiento común,
       compartido.
       <NewLine />
-      <Emphasis>
-        Este puede ser el destino que nos aguarde a todos nosotros.
-      </Emphasis>
+      Este puede ser el destino que nos aguarde a todos nosotros.
     </Storylet>
   );
 };

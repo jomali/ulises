@@ -24,8 +24,6 @@ const Itaca7 = () => {
 
   return (
     <Storylet options={options}>
-      Tú, acompáñame.
-      <NewLine />
       Un guarda te saca de la celda y te conduce a solas por un estrecho
       pasillo. Aterrorizado piensas en el dinero que te queda, escondido bajo la
       suela del zapato. Quizá… quizá sea suficiente para salir de aquí.

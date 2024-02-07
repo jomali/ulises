@@ -9,8 +9,6 @@ const Itaca11 = () => {
       ¿Qué otra cosa puedes hacer?
       <NewLine />
       Echas a andar.
-      <NewLine />
-      Hacia el sur.
     </Storylet>
   );
 };

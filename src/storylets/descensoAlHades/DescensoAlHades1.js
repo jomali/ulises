@@ -7,7 +7,7 @@ const DescensoAlHades1 = () => {
 
   return (
     <Storylet options={options}>
-      Camináis en fila india bajo el sol inclemente. Semidesnudos. Hostigados a
+      Camináis en fila india bajo un sol inclemente, semidesnudos, hostigados a
       cada paso por la sed y el hambre.
       <NewLine />
       No todo el mundo es capaz de resistirlo. Tres cuerpos se desploman
