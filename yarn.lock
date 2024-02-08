@@ -1988,6 +1988,11 @@ inherits@2:
   resolved "https://registry.yarnpkg.com/inherits/-/inherits-2.0.4.tgz#0fa2c64f932917c3433a0ded55363aae37416b7c"
   integrity sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==
 
+inkjs@^2.2.2:
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/inkjs/-/inkjs-2.2.2.tgz#a50df426badc564b526d9f91def9b0ec16938e43"
+  integrity sha512-SSI054diwSr7rwe6cIMAR8eJu3WVhrwhLEYVsgR0OjqE2Jt22mG1zej236fXSM7ofzQWsQfFfvfeDa881RjKpQ==
+
 internal-slot@^1.0.5:
   version "1.0.7"
   resolved "https://registry.yarnpkg.com/internal-slot/-/internal-slot-1.0.7.tgz#c06dcca3ed874249881007b0a5523b172a190802"
