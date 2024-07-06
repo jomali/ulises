@@ -1,11 +1,14 @@
 import React from "react";
 import Stack from "@mui/material/Stack";
 import { styled, useTheme } from "@mui/material/styles";
+import Typography from "@mui/material/Typography";
 import Box from "@mui/system/Box";
-import { Story } from "inkjs";
+import { AnimatePresence, motion } from "framer-motion";
+import { Interweave } from "interweave";
 import AppBar from "../AppBar";
 import Container from "../Container";
 import Option from "../Option";
+import useStory from "./useStory";
 
 const Main = styled("main")(() => ({
   display: "flex",
@@ -17,50 +20,26 @@ export const StoryContext = React.createContext({});
 
 export const StoryProvider = () => {
   const theme = useTheme();
+  const story = useStory("ulises.json");
 
-  const [story, setStory] = React.useState<InstanceType<typeof Story>>();
-  const [contents, setContents] = React.useState<(string | null)[]>([]);
-
-  React.useEffect(() => {
-    const fetchStory = async () => {
-      const storyData = await fetch("ulises.json");
-      const result = await storyData.text();
-      setStory(new Story(result));
-    };
-
-    fetchStory();
-  }, []);
-
-  const handleContinue = () => {
-    if (story?.canContinue) {
-      const updatedContents: (string | null)[] = [...contents];
-      updatedContents.push(story.Continue());
-      setContents(updatedContents);
-    }
-  };
+  const scrollableRef: any = React.useRef();
 
   const printOptions = () => {
     return (
-      <Stack direction="column" spacing={1}>
-        {story?.canContinue ? (
-          <Option onClick={handleContinue}>...</Option>
+      <Stack direction="column" spacing={1} sx={{ marginTop: 8 }}>
+        {story.canContinue ? (
+          <Option onClick={() => story.continue()}>...</Option>
         ) : (
           <>
-            {story?.currentChoices.map((element, index) => {
-              const isMoneyOption = element.tags?.length;
+            {story.choices.map((element, index) => {
+              const moneyCost = parseInt(element.tags?.[0] ?? "0");
               return (
                 <Option
-                  difficulty={
-                    isMoneyOption
-                      ? parseInt(element.tags?.[0] ?? "0")
-                      : undefined
-                  }
-                  variant={isMoneyOption ? "money" : undefined}
+                  disabled={moneyCost > story.state.money}
+                  difficulty={moneyCost > 0 ? moneyCost : undefined}
+                  variant={moneyCost > 0 ? "money" : undefined}
                   key={`option-${index}`}
-                  onClick={() => {
-                    story.ChooseChoiceIndex(index);
-                    handleContinue();
-                  }}
+                  onClick={() => story.continue({ choice: index })}
                 >
                   {element.text}
                 </Option>
@@ -72,11 +51,21 @@ export const StoryProvider = () => {
     );
   };
 
+  React.useEffect(() => {
+    if (scrollableRef.current) {
+      scrollableRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+        inline: "nearest",
+      });
+    }
+  }, [story.contents]);
+
   return (
     <StoryContext.Provider value={{}}>
       <Main>
         <AppBar
-          title={`Dinero: ${story?.variablesState["money"]}₺`}
+          title={`Dinero: ${story.state.money}₺`}
           TitleProps={{ timeout: theme.transitions.duration.standard }}
         />
         <Container maxWidth="sm">
@@ -87,9 +76,22 @@ export const StoryProvider = () => {
               flexGrow: 1,
             }}
           >
-            {contents.map((element, index) => (
-              <p key={`content-${index}`}>{element}</p>
-            ))}
+            <AnimatePresence mode="wait">
+              {story.contents.map((element, index) => (
+                <motion.div
+                  key={`content-${element.key}-${index}`}
+                  animate={{ opacity: 1, scale: 1 }}
+                  initial={{ opacity: 0, scale: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 1 }}
+                  ref={scrollableRef}
+                >
+                  <Typography sx={{ marginBottom: 3 }}>
+                    <Interweave content={element.value} />
+                  </Typography>
+                </motion.div>
+              ))}
+            </AnimatePresence>
           </Box>
           {printOptions()}
         </Container>
