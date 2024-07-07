@@ -40,6 +40,7 @@ Bueno, el trato <i>ahora</i> son cincuenta talentos. Si quieres subir, pagas. Si
 Miras a tu espalda, en dirección al pueblo que duerme a un centenar de metros. Y más allá. Hacia la vida que dejas atrás, sepultada tras la caída de la noche oscura.
 
 Sabes perfectamente que ahora mismo no puedes regresar allí, por mucho que lo desearas.
+
 * [Dar el dinero # 50] -> ElPacto.c
 
 = b
