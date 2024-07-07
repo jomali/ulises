@@ -1,4 +1,5 @@
 import React from "react";
+import Divider from "@mui/material/Divider";
 import Stack from "@mui/material/Stack";
 import { styled, useTheme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
@@ -8,6 +9,7 @@ import { Interweave } from "interweave";
 import AppBar from "../AppBar";
 import Container from "../Container";
 import Option from "../Option";
+import useDebounce from "../useDebounce";
 import useStory from "./useStory";
 
 const Main = styled("main")(() => ({
@@ -24,32 +26,7 @@ export const StoryProvider = () => {
 
   const scrollableRef: any = React.useRef();
 
-  const printOptions = () => {
-    return (
-      <Stack direction="column" spacing={1} sx={{ marginTop: 8 }}>
-        {story.canContinue ? (
-          <Option onClick={() => story.continue()}>...</Option>
-        ) : (
-          <>
-            {story.choices.map((element, index) => {
-              const moneyCost = parseInt(element.tags?.[0] ?? "0");
-              return (
-                <Option
-                  disabled={moneyCost > story.state.money}
-                  difficulty={moneyCost > 0 ? moneyCost : undefined}
-                  variant={moneyCost > 0 ? "money" : undefined}
-                  key={`option-${index}`}
-                  onClick={() => story.continue({ choice: index })}
-                >
-                  {element.text}
-                </Option>
-              );
-            })}
-          </>
-        )}
-      </Stack>
-    );
-  };
+  const temp = useDebounce(story.last, theme.transitions.duration.shorter + 1);
 
   React.useEffect(() => {
     if (scrollableRef.current) {
@@ -59,7 +36,7 @@ export const StoryProvider = () => {
         inline: "nearest",
       });
     }
-  }, [story.contents]);
+  }, [temp]);
 
   return (
     <StoryContext.Provider value={{}}>
@@ -82,10 +59,26 @@ export const StoryProvider = () => {
                   key={`content-${element.key}-${index}`}
                   animate={{ opacity: 1, scale: 1 }}
                   initial={{ opacity: 0, scale: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 1 }}
-                  ref={scrollableRef}
+                  exit={{
+                    opacity: 0,
+                    transition: {
+                      ease: [0.4, 0, 1, 1], // MUI easeIn
+                      duration: theme.transitions.duration.shorter * 0.001,
+                    },
+                  }}
+                  transition={{
+                    ease: [0.0, 0, 0.2, 1], // MUI easeOut
+                    duration: theme.transitions.duration.standard * 0.001,
+                  }}
                 >
+                  {story.last !== 0 && story.last === index && (
+                    <Divider
+                      ref={scrollableRef}
+                      sx={{ marginBottom: 3, scrollMarginTop: 64 }}
+                      flexItem
+                      variant="middle"
+                    />
+                  )}
                   <Typography sx={{ marginBottom: 3 }}>
                     <Interweave content={element.value} />
                   </Typography>
@@ -93,7 +86,39 @@ export const StoryProvider = () => {
               ))}
             </AnimatePresence>
           </Box>
-          {printOptions()}
+
+          <Stack direction="column" spacing={1} sx={{ marginTop: 8 }}>
+            <AnimatePresence mode="wait">
+              {story.choices.map((element) => (
+                <motion.div
+                  style={{ display: "flex" }}
+                  key={element.key}
+                  animate={{ opacity: 1, scale: 1 }}
+                  initial={{ opacity: 0, scale: 1 }}
+                  exit={{
+                    opacity: 0,
+                    transition: {
+                      ease: [0.4, 0, 1, 1], // MUI easeIn
+                      duration: theme.transitions.duration.shorter * 0.001,
+                    },
+                  }}
+                  transition={{
+                    ease: [0.0, 0, 0.2, 1], // MUI easeOut
+                    duration: theme.transitions.duration.standard * 0.001,
+                  }}
+                >
+                  <Option
+                    difficulty={element.difficulty}
+                    disabled={element.disabled}
+                    onClick={element.callback}
+                    variant={element.variant}
+                  >
+                    {element.label}
+                  </Option>
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </Stack>
         </Container>
       </Main>
     </StoryContext.Provider>

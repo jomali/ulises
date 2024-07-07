@@ -1,6 +1,15 @@
 import React from "react";
 import { Story } from "inkjs";
 
+type Choice = {
+  callback: VoidFunction;
+  difficulty?: number;
+  disabled?: boolean;
+  label: string;
+  variant?: "default" | "money";
+  key: string;
+};
+
 // eslint-disable-next-line no-unused-vars
 type Continue = (options?: { choice: number; step?: "all" | "one" }) => void;
 
@@ -9,6 +18,7 @@ type StoryContent = { key: string; value: string | null };
 export default (storyFile: string) => {
   const [story, setStory] = React.useState<InstanceType<typeof Story>>();
   const [contents, setContents] = React.useState<StoryContent[]>([]);
+  const [last, setLast] = React.useState(0);
 
   React.useEffect(() => {
     const fetchStory = async () => {
@@ -22,6 +32,33 @@ export default (storyFile: string) => {
 
     fetchStory();
   }, [storyFile]);
+
+  const choices = React.useMemo(() => {
+    let result: Choice[] = [];
+    if (story?.canContinue) {
+      result = [
+        {
+          callback: () => handleContinue(),
+          key: `choice-0-${Date.now().toString()}`,
+          label: "…",
+        },
+      ];
+    } else {
+      result =
+        story?.currentChoices.map((element, index) => {
+          const moneyCost = parseInt(element.tags?.[0] ?? "0");
+          return {
+            callback: () => handleContinue({ choice: index }),
+            difficulty: moneyCost > 0 ? moneyCost : undefined,
+            disabled: moneyCost > story?.variablesState["money"],
+            key: `choice-${index}-${Date.now().toString()}`,
+            label: element.text,
+            variant: moneyCost > 0 ? "money" : "default",
+          };
+        }) ?? [];
+    }
+    return result;
+  }, [story?.canContinue, story?.currentChoices, story?.variablesState]);
 
   const getNextParagraph: (
     // eslint-disable-next-line no-unused-vars
@@ -86,22 +123,20 @@ export default (storyFile: string) => {
       story?.ChooseChoiceIndex(options.choice);
     }
     if (story?.canContinue) {
-      setContents((currentContents) => {
-        const newContent =
-          options?.step !== "one"
-            ? getNextStorylet(story)
-            : getNextParagraph(story);
-        const previousContents = newContent.newScreen
-          ? []
-          : [...currentContents];
-        return [...previousContents, ...newContent.data];
-      });
+      const newContent =
+        options?.step !== "one"
+          ? getNextStorylet(story)
+          : getNextParagraph(story);
+      const previousContents = newContent.newScreen ? [] : [...contents];
+      setContents(() => [...previousContents, ...newContent.data]);
+      setLast(() => previousContents.length);
     }
   };
 
   return {
+    last,
     canContinue: story?.canContinue || false,
-    choices: story?.currentChoices || [],
+    choices,
     contents,
     continue: handleContinue,
     state: {
