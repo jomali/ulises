@@ -335,7 +335,9 @@ De nuevo en la celda.
 
 Uno de tus compañeros te abraza y llora contigo en silencio.
 
-~ modifyMoney(-money)
+{ money > 0: 
+    ~ modifyMoney(-money)
+}
 
 * [Cerrar los ojos]
 
