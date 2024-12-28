@@ -153,11 +153,20 @@ export default (storyFile: string) => {
     return result;
   };
 
+  const handleRestart = React.useCallback(() => {
+    if (story) {
+      story.ResetState();
+      const contents = getNextStorylet(story);
+      setContents([...contents.data]);
+    }
+  }, [story]);
+
   return {
     canContinue: story?.canContinue || false,
     choices,
     contents,
     continue: handleContinue,
+    restart: handleRestart,
     state: {
       money: story?.variablesState["money"] || 0,
     },

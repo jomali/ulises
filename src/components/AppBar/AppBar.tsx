@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "@emotion/styled";
 import ReplayRoundedIcon from "@mui/icons-material/ReplayRounded";
+import { Tooltip } from "@mui/material";
 import MuiAppBar from "@mui/material/AppBar";
 import Fade from "@mui/material/Fade";
 import IconButton from "@mui/material/IconButton";
@@ -29,7 +30,7 @@ const Gap = styled("span")(() => ({
   flexGrow: 1,
 }));
 
-const AppBar = (props: any) => {
+const AppBar: React.FC<IAppBar> = (props) => {
   const { onMenuClick, title, TitleProps = {} } = props;
 
   const theme = useTheme();
@@ -56,18 +57,30 @@ const AppBar = (props: any) => {
             </Typography>
           </Fade>
           <Gap />
-          <IconButton
-            aria-label="menu"
-            edge="end"
-            onClick={onMenuClick}
-            size="medium"
-          >
-            <ReplayRoundedIcon fontSize="inherit" />
-          </IconButton>
+          {onMenuClick ? (
+            <Tooltip title="Reiniciar">
+              <IconButton
+                aria-label="menu"
+                edge="end"
+                onClick={onMenuClick}
+                size="medium"
+              >
+                <ReplayRoundedIcon fontSize="inherit" />
+              </IconButton>
+            </Tooltip>
+          ) : null}
         </Toolbar>
       </MuiAppBar>
     </ElevationScroll>
   );
 };
+
+export interface IAppBar {
+  onMenuClick?: () => void;
+  title: string;
+  TitleProps?: {
+    timeout?: number;
+  };
+}
 
 export default AppBar;
