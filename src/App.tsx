@@ -34,7 +34,7 @@ const App = () => {
     <Div100vh>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <StoryProvider />
+        <StoryProvider storyFile="ulises.json" />
       </ThemeProvider>
     </Div100vh>
   );
