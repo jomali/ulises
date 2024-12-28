@@ -2,7 +2,7 @@ import React from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Div100vh from "react-div-100vh";
-import StoryProvider from "./components/StoryProvider";
+import Story from "./components/Story";
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
@@ -34,7 +34,7 @@ const App = () => {
     <Div100vh>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <StoryProvider storyFile="ulises.json" />
+        <Story storyFile="ulises.json" />
       </ThemeProvider>
     </Div100vh>
   );
