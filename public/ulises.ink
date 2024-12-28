@@ -289,6 +289,7 @@ Otros cuerpos compartiendo contigo el reducido espacio.
 * [Cerrar los ojos]
 
 -
+@cleanScreen
 Los alaridos de alguien, en alguna parte, amortiguados por las paredes.
 
 * [Cerrar los ojos]
