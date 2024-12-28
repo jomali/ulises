@@ -1,6 +1,8 @@
 import React from "react";
 import { Story } from "inkjs";
 
+const CLEAN_SCREEN_TAG = "@cleanScreen\n";
+
 type Choice = {
   callback: VoidFunction;
   difficulty?: number;
@@ -13,12 +15,16 @@ type Choice = {
 // eslint-disable-next-line no-unused-vars
 type Continue = (options?: { choice: number; step?: "all" | "one" }) => void;
 
-type StoryContent = { key: string; value: string | null };
+type StoryContent = {
+  divider?: boolean;
+  key: string;
+  new: boolean;
+  value?: string | null;
+};
 
 export default (storyFile: string) => {
   const [story, setStory] = React.useState<InstanceType<typeof Story>>();
   const [contents, setContents] = React.useState<StoryContent[]>([]);
-  const [last, setLast] = React.useState(0);
 
   React.useEffect(() => {
     const fetchStory = async () => {
@@ -32,6 +38,30 @@ export default (storyFile: string) => {
 
     fetchStory();
   }, [storyFile]);
+
+  const handleContinue: Continue = (options) => {
+    if (story?.canContinue) {
+      const newContent =
+        options?.step !== "one"
+          ? getNextStorylet(story)
+          : getNextParagraph(story);
+      const previousContents = newContent.newScreen
+        ? []
+        : [
+            ...contents.map((element) => ({
+              ...element,
+              new: false,
+            })),
+            {
+              divider: true,
+              key: Date.now().toString(),
+              new: false,
+            },
+          ];
+
+      setContents(() => [...previousContents, ...newContent.data]);
+    }
+  };
 
   const choices = React.useMemo(() => {
     let result: Choice[] = [];
@@ -48,7 +78,10 @@ export default (storyFile: string) => {
         story?.currentChoices.map((element, index) => {
           const moneyCost = parseInt(element.tags?.[0] ?? "0");
           return {
-            callback: () => handleContinue({ choice: index }),
+            callback: () => {
+              story.ChooseChoiceIndex(index);
+              handleContinue();
+            },
             difficulty: moneyCost > 0 ? moneyCost : undefined,
             disabled: moneyCost > story?.variablesState["money"],
             key: `choice-${index}-${Date.now().toString()}`,
@@ -78,11 +111,12 @@ export default (storyFile: string) => {
     };
     if (storyObject) {
       const nextParagraph = storyObject.Continue();
-      if (nextParagraph === "@cleanScreen\n") {
+      if (nextParagraph === CLEAN_SCREEN_TAG) {
         return getNextParagraph(storyObject, true);
       } else {
         result.data.push({
           key: Date.now().toString(),
+          new: true,
           value: nextParagraph,
         });
       }
@@ -105,12 +139,13 @@ export default (storyFile: string) => {
     };
     while (storyObject?.canContinue) {
       const nextParagraph = storyObject.Continue();
-      if (nextParagraph === "@cleanScreen\n") {
+      if (nextParagraph === CLEAN_SCREEN_TAG) {
         result.newScreen = true;
         continue;
       } else {
         result.data.push({
           key: Date.now().toString(),
+          new: true,
           value: nextParagraph,
         });
       }
@@ -118,23 +153,7 @@ export default (storyFile: string) => {
     return result;
   };
 
-  const handleContinue: Continue = (options) => {
-    if (options?.choice || options?.choice === 0) {
-      story?.ChooseChoiceIndex(options.choice);
-    }
-    if (story?.canContinue) {
-      const newContent =
-        options?.step !== "one"
-          ? getNextStorylet(story)
-          : getNextParagraph(story);
-      const previousContents = newContent.newScreen ? [] : [...contents];
-      setContents(() => [...previousContents, ...newContent.data]);
-      setLast(() => previousContents.length);
-    }
-  };
-
   return {
-    last,
     canContinue: story?.canContinue || false,
     choices,
     contents,

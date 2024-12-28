@@ -20,13 +20,19 @@ const Main = styled("main")(() => ({
 
 export const StoryContext = React.createContext({});
 
-export const StoryProvider = () => {
+export const StoryProvider: React.FC<IStoryProvider> = (props) => {
+  const { storyFile } = props;
+
   const theme = useTheme();
-  const story = useStory("ulises.json");
+  const story = useStory(storyFile);
 
-  const scrollableRef: any = React.useRef();
+  const scrollableRef: React.RefObject<HTMLElement | undefined> =
+    React.useRef();
 
-  const temp = useDebounce(story.last, theme.transitions.duration.shorter + 1);
+  const temp = useDebounce(
+    story.contents.length,
+    theme.transitions.duration.shorter + 1
+  );
 
   React.useEffect(() => {
     if (scrollableRef.current) {
@@ -56,7 +62,7 @@ export const StoryProvider = () => {
             <AnimatePresence mode="wait">
               {story.contents.map((element, index) => (
                 <motion.div
-                  key={`content-${element.key}-${index}`}
+                  key={`content-${index}-${element.key}`}
                   animate={{ opacity: 1, scale: 1 }}
                   initial={{ opacity: 0, scale: 1 }}
                   exit={{
@@ -71,56 +77,65 @@ export const StoryProvider = () => {
                     duration: theme.transitions.duration.standard * 0.001,
                   }}
                 >
-                  {story.last !== 0 && story.last === index && (
+                  {element.divider ? (
                     <Divider
-                      ref={scrollableRef}
+                      ref={scrollableRef as React.RefObject<HTMLHRElement>}
                       sx={{ marginBottom: 3, scrollMarginTop: 64 }}
                       flexItem
                       variant="middle"
                     />
+                  ) : (
+                    <Typography
+                      sx={{
+                        color: (theme) =>
+                          element.new ? "inherit" : theme.palette.text.disabled,
+                        marginBottom: 3,
+                      }}
+                    >
+                      <Interweave content={element.value} />
+                    </Typography>
                   )}
-                  <Typography sx={{ marginBottom: 3 }}>
-                    <Interweave content={element.value} />
-                  </Typography>
                 </motion.div>
               ))}
             </AnimatePresence>
           </Box>
 
           <Stack direction="column" spacing={1} sx={{ marginTop: 8 }}>
-            <AnimatePresence mode="wait">
-              {story.choices.map((element) => (
-                <motion.div
-                  style={{ display: "flex" }}
-                  key={element.key}
-                  animate={{ opacity: 1, scale: 1 }}
-                  initial={{ opacity: 0, scale: 1 }}
-                  exit={{
-                    opacity: 0,
-                    transition: {
-                      ease: [0.4, 0, 1, 1], // MUI easeIn
-                      duration: theme.transitions.duration.shorter * 0.001,
-                    },
-                  }}
-                  transition={{
-                    ease: [0.0, 0, 0.2, 1], // MUI easeOut
-                    duration: theme.transitions.duration.standard * 0.001,
-                  }}
+            {story.choices.map((element) => (
+              <motion.div
+                style={{ display: "flex" }}
+                key={element.key}
+                animate={{ opacity: 1, scale: 1 }}
+                initial={{ opacity: 0, scale: 1 }}
+                exit={{
+                  opacity: 0,
+                  transition: {
+                    ease: [0.4, 0, 1, 1], // MUI easeIn
+                    duration: theme.transitions.duration.shorter * 0.001,
+                  },
+                }}
+                transition={{
+                  ease: [0.0, 0, 0.2, 1], // MUI easeOut
+                  duration: theme.transitions.duration.standard * 0.001,
+                }}
+              >
+                <Option
+                  difficulty={element.difficulty}
+                  disabled={element.disabled}
+                  onClick={element.callback}
+                  variant={element.variant}
                 >
-                  <Option
-                    difficulty={element.difficulty}
-                    disabled={element.disabled}
-                    onClick={element.callback}
-                    variant={element.variant}
-                  >
-                    {element.label}
-                  </Option>
-                </motion.div>
-              ))}
-            </AnimatePresence>
+                  {element.label}
+                </Option>
+              </motion.div>
+            ))}
           </Stack>
         </Container>
       </Main>
     </StoryContext.Provider>
   );
 };
+
+export interface IStoryProvider {
+  storyFile: string;
+}
